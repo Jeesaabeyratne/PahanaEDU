@@ -5,6 +5,7 @@
 <body>
 <h2>Welcome Admin, <%= session.getAttribute("userName") %></h2>
 <p>This is the admin dashboard.</p>
+<a href="add-customer.jsp">Add Customer</a>
 <a href="logout.jsp">Logout</a>
 </body>
 </html>
