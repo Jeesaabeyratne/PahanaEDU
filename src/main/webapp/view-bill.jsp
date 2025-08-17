@@ -1,8 +1,11 @@
+<%@ page import="com.book.service.BillService"%>
+<%@ page import="com.book.dto.BillDTO"%>
+<%@ page import="java.util.List"%>
 <%@ page session="true" %>
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Cashier Dashboard</title>
+    <title>All Bills</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         body {
@@ -104,35 +107,37 @@
             color: #ffe082;
         }
 
-        /* ---------- DASHBOARD PANELS ---------- */
-        .dashboard {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 20px;
-        }
-
-        .card {
+        /* ---------- TABLE ---------- */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
             background: white;
-            padding: 30px 20px;
-            border-radius: 12px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
+        }
+
+        th, td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
             text-align: center;
-            color: #2c3e50;
-            text-decoration: none;
-            font-weight: bold;
+        }
+
+        th {
+            background-color: #2c3e50;
+            color: white;
             font-size: 16px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            transition: transform 0.3s, background 0.3s;
         }
 
-        .card i {
-            font-size: 36px;
-            margin-bottom: 10px;
-            color: #1abc9c;
+        tr:hover {
+            background-color: #f1f1f1;
         }
 
-        .card:hover {
-            transform: translateY(-5px);
-            background: #ecf0f1;
+        .no-data {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #7f8c8d;
         }
     </style>
 </head>
@@ -140,7 +145,7 @@
 
 <!-- Sidebar -->
 <div class="sidebar">
-    <div class="brand">Cashier Panel</div>
+    <div class="brand">Panel</div>
     <nav>
         <a href="help.jsp" class="help"><i class="fa fa-circle-question"></i> Help & Support</a>
         <a href="javascript:history.back()" class="back"><i class="fa fa-arrow-left"></i> Go Back</a>
@@ -151,19 +156,50 @@
 <!-- Main Content -->
 <div class="main">
     <header>
-        <h2>Cashier Dashboard</h2>
+        <h2>All Bills</h2>
         <p>Welcome, <span><%= session.getAttribute("userName") %></span></p>
     </header>
 
-    <!-- Dashboard Panels -->
-    <div class="dashboard">
-        <a href="add-customer.jsp" class="card"><i class="fa fa-user-plus"></i><br>Add Customer</a>
-        <a href="view-customer.jsp" class="card"><i class="fa fa-id-card"></i><br>View Customer</a>
-        <a href="update-customer.jsp" class="card"><i class="fa fa-user-pen"></i><br>Update Customer</a>
-        <a href="view-book.jsp" class="card"><i class="fa fa-book-open"></i><br>View Books</a>
-        <a href="create-bill.jsp" class="card"><i class="fa fa-file-invoice-dollar"></i><br>Create Bill</a>
-        <a href="view-bill.jsp" class="card"><i class="fa fa-receipt"></i><br>View Bills</a>
-    </div>
+    <%
+        BillService billService = new BillService();
+        List<BillDTO> bills = billService.getAllBills();
+        if (bills == null || bills.isEmpty()) {
+    %>
+    <p class="no-data">No bills found.</p>
+    <%
+    } else {
+    %>
+    <table>
+        <thead>
+        <tr>
+            <th>Bill ID</th>
+            <th>Customer ID</th>
+            <th>Date</th>
+            <th>Total Amount</th>
+            <th>Discount</th>
+            <th>Final Amount</th>
+        </tr>
+        </thead>
+        <tbody>
+        <%
+            for (BillDTO bill : bills) {
+        %>
+        <tr>
+            <td><%= bill.getId() %></td>
+            <td><%= bill.getCustomerId() %></td>
+            <td><%= bill.getBillDateTime() %></td>
+            <td>Rs. <%= bill.getTotalAmount() %></td>
+            <td>Rs. <%= bill.getDiscount() %></td>
+            <td>Rs. <%= bill.getFinalAmount() %></td>
+        </tr>
+        <%
+            }
+        %>
+        </tbody>
+    </table>
+    <%
+        }
+    %>
 </div>
 
 </body>

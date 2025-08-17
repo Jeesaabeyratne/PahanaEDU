@@ -21,6 +21,6 @@ public class CustomerServlet extends HttpServlet {
 
         customerService.addCustomer(email, name, address, telephone);
 
-        response.sendRedirect("admin-db.jsp?success=true");
+        response.sendRedirect("user-db.jsp?success=true");
     }
 }
