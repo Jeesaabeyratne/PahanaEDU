@@ -2,14 +2,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>JSP - Hello World</title>
+    <title>Welcome</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<h1><%= "Hello World!" %>
-</h1>
-<br/>
-<a href="login.jsp">Login Page</a>
-<a href="register.jsp">Register Page</a>
-
+<div class="container">
+    <h1>Pahana EDU Book Shop</h1>
+    <br/>
+    <a href="login.jsp" class="button">Login Page</a>
+    <a href="register.jsp" class="button">Register Page</a>
+</div>
 </body>
 </html>
