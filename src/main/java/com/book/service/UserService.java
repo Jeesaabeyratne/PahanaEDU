@@ -4,6 +4,8 @@ import com.book.dao.UserDAO;
 import com.book.model.User;
 import org.mindrot.jbcrypt.BCrypt;
 
+import java.util.List;
+
 public class UserService {
     private UserDAO userDAO = new UserDAO();
 
@@ -31,5 +33,17 @@ public class UserService {
             return user;
         }
         return null;
+    }
+
+    public boolean deleteUserById(Long userId) {
+        return userDAO.deleteById(userId);
+    }
+
+    public List<User> viewAllUsers() {
+        return userDAO.findAll();
+    }
+
+    public User getUserByName(String name) {
+        return userDAO.findByName(name);
     }
 }

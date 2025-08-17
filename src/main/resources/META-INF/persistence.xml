@@ -4,6 +4,10 @@
     <persistence-unit name="myPU" transaction-type="RESOURCE_LOCAL">
         <class>com.book.model.User</class>
         <class>com.book.model.Customer</class>
+        <class>com.book.model.BookCat</class>
+        <class>com.book.model.Book</class>
+        <class>com.book.model.Bill</class>
+        <class>com.book.model.BillItem</class>
         <properties>
             <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/Book?createDatabaseIfNotExist=true"/>
             <property name="jakarta.persistence.jdbc.user" value="root"/>

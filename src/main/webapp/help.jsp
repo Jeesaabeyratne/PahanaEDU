@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Cashier Dashboard</title>
+    <title>Help & Support</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         body {
@@ -57,18 +57,12 @@
         .sidebar nav a.back {
             background-color: #2980b9;
         }
-
-        .sidebar nav a.back:hover {
-            background-color: #1f6390;
-        }
+        .sidebar nav a.back:hover { background-color: #1f6390; }
 
         .sidebar nav a.logout {
             background-color: #e74c3c;
         }
-
-        .sidebar nav a.logout:hover {
-            background-color: #c0392b;
-        }
+        .sidebar nav a.logout:hover { background-color: #c0392b; }
 
         /* ---------- MAIN CONTENT ---------- */
         .main {
@@ -99,40 +93,26 @@
             color: #ecf0f1;
         }
 
-        header span {
-            font-weight: bold;
-            color: #ffe082;
-        }
-
-        /* ---------- DASHBOARD PANELS ---------- */
-        .dashboard {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 20px;
-        }
-
-        .card {
+        /* ---------- HELP CONTENT ---------- */
+        .help-section {
             background: white;
-            padding: 30px 20px;
+            padding: 25px;
             border-radius: 12px;
-            text-align: center;
-            color: #2c3e50;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 16px;
+            margin-bottom: 20px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            transition: transform 0.3s, background 0.3s;
         }
 
-        .card i {
-            font-size: 36px;
+        .help-section h3 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+
+        .help-section ul {
+            padding-left: 20px;
+        }
+
+        .help-section li {
             margin-bottom: 10px;
-            color: #1abc9c;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            background: #ecf0f1;
         }
     </style>
 </head>
@@ -140,10 +120,9 @@
 
 <!-- Sidebar -->
 <div class="sidebar">
-    <div class="brand">Cashier Panel</div>
+    <div class="brand">Help Center</div>
     <nav>
-        <a href="help.jsp" class="help"><i class="fa fa-circle-question"></i> Help & Support</a>
-        <a href="javascript:history.back()" class="back"><i class="fa fa-arrow-left"></i> Go Back</a>
+        <a href="javascript:history.back()" class="back"><i class="fa fa-arrow-left"></i> Back</a>
         <a href="logout.jsp" class="logout"><i class="fa fa-sign-out-alt"></i> Logout</a>
     </nav>
 </div>
@@ -151,18 +130,53 @@
 <!-- Main Content -->
 <div class="main">
     <header>
-        <h2>Cashier Dashboard</h2>
-        <p>Welcome, <span><%= session.getAttribute("userName") %></span></p>
+        <h2>Help & Support</h2>
+        <p>Find guidance for using the system</p>
     </header>
 
-    <!-- Dashboard Panels -->
-    <div class="dashboard">
-        <a href="add-customer.jsp" class="card"><i class="fa fa-user-plus"></i><br>Add Customer</a>
-        <a href="view-customer.jsp" class="card"><i class="fa fa-id-card"></i><br>View Customer</a>
-        <a href="update-customer.jsp" class="card"><i class="fa fa-user-pen"></i><br>Update Customer</a>
-        <a href="view-book.jsp" class="card"><i class="fa fa-book-open"></i><br>View Books</a>
-        <a href="create-bill.jsp" class="card"><i class="fa fa-file-invoice-dollar"></i><br>Create Bill</a>
-        <a href="cashier-view-bill.jsp" class="card"><i class="fa fa-receipt"></i><br>View Bills</a>
+    <!-- Sections -->
+    <div class="help-section">
+        <h3><i class="fa fa-circle-info"></i> General Guidance</h3>
+        <ul>
+            <li>Use the <b>Sidebar</b> to navigate between sections (Books, Customers, Billing, Categories).</li>
+            <li>Always <b>log out</b> after using the system for security purposes.</li>
+            <li>If you encounter errors, try refreshing or logging in again.</li>
+        </ul>
+    </div>
+
+    <div class="help-section">
+        <h3><i class="fa fa-book"></i> Book Management</h3>
+        <ul>
+            <li><b>Add Book:</b> Enter book details such as title, author, ISBN, price, stock, and category.</li>
+            <li><b>Edit Book:</b> Update book details whenever stock or price changes.</li>
+            <li><b>View Books:</b> Browse the complete list of books in stock.</li>
+        </ul>
+    </div>
+
+    <div class="help-section">
+        <h3><i class="fa fa-users"></i> Customer Management</h3>
+        <ul>
+            <li><b>Add Customer:</b> Register new customers with their personal details.</li>
+            <li><b>View Customers:</b> View all customer records.</li>
+            <li><b>Update Customer:</b> Modify existing customer information.</li>
+        </ul>
+    </div>
+
+    <div class="help-section">
+        <h3><i class="fa fa-file-invoice-dollar"></i> Billing</h3>
+        <ul>
+            <li><b>Create Bill:</b> Generate invoices for customer purchases.</li>
+            <li><b>View Bills:</b> Access previously generated invoices for reference.</li>
+        </ul>
+    </div>
+
+    <div class="help-section">
+        <h3><i class="fa fa-envelope"></i> Contact Support</h3>
+        <p>If you need further assistance, please contact the system administrator:</p>
+        <ul>
+            <li>Email: <a href="mailto:support@bookshop.com">support@bookshop.com</a></li>
+            <li>Phone: +94 77 123 4567</li>
+        </ul>
     </div>
 </div>
 

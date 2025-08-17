@@ -24,10 +24,7 @@ public class UserDAO {
         }
     }
 
-    public List<User> findAll() {
-        EntityManager em = emf.createEntityManager();
-        return em.createQuery("SELECT u FROM User u", User.class).getResultList();
-    }
+
 
     public User findByEmail(String email) {
         EntityManager em = emf.createEntityManager();
@@ -37,6 +34,48 @@ public class UserDAO {
                     .getSingleResult();
         } catch (NoResultException e) {
             return null; // User not found
+        } finally {
+            em.close();
+        }
+    }
+
+    public boolean deleteById(Long userId) {
+        EntityManager em = emf.createEntityManager();
+        EntityTransaction tx = em.getTransaction();
+        try {
+            tx.begin();
+            User user = em.find(User.class, userId);
+            if (user == null) {
+                return false;
+            }
+            em.remove(user);
+            tx.commit();
+            return true;
+        } catch (Exception e) {
+            if (tx.isActive()) tx.rollback();
+            throw e;
+        } finally {
+            em.close();
+        }
+    }
+
+    public List<User> findAll() {
+        EntityManager em = emf.createEntityManager();
+        try {
+            return em.createQuery("SELECT u FROM User u", User.class).getResultList();
+        } finally {
+            em.close();
+        }
+    }
+
+    public User findByName(String name) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            return em.createQuery("SELECT u FROM User u WHERE u.name = :name", User.class)
+                    .setParameter("name", name)
+                    .getSingleResult();
+        } catch (NoResultException e) {
+            return null;
         } finally {
             em.close();
         }
